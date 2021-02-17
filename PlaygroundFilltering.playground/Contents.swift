@@ -65,7 +65,19 @@ example(of: "filter") {
             print($0)
         })
         .disposed(by: disposeBag)
+}
+
+example(of: "Skip while") {
     
+    let diposeBag = DisposeBag()
+    Observable.from(tomatometerRatings)
+        .skipWhile { movie in
+            movie.rating < 90
+        }
+        .subscribe(onNext:  {
+            print($0)
+        })
+        .disposed(by: diposeBag)
 }
 
 
