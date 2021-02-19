@@ -141,6 +141,31 @@ example(of: "SkipUntil") {
     subject.onNext(episodeVI.title)
 }
 
+example(of: "TakeUntil") {
+    
+    let diposebag = DisposeBag()
+    
+    let subject = PublishSubject<String>()
+    let trigger = PublishSubject<Void>()
+    
+    subject
+        .takeUntil(trigger)
+        .subscribe(onNext: {
+            print($0)
+        })
+        .disposed(by: diposebag)
+    
+    subject.onNext(episodeI.title)
+    subject.onNext(episodeII.title)
+    subject.onNext(episodeIII.title)
+    
+    trigger.onNext(())
+
+    subject.onNext(episodeIV.title)
+    subject.onNext(episodeV.title)
+    subject.onNext(episodeVI.title)
+}
+
 
 
 
