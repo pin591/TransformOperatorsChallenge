@@ -1,11 +1,11 @@
 import UIKit
 import RxSwift
 
-public let episodeI = (title: "The Phantom Menace", rating: 55)
-public let episodeII = (title: "Attack of the Clones", rating: 66)
-public let episodeIII = (title: "Revenge of the Sith", rating: 79)
+public let episodeI = (title: "1-The Phantom Menace", rating: 55)
+public let episodeII = (title: "2-Attack of the Clones", rating: 66)
+public let episodeIII = (title: "3-Revenge of the Sith", rating: 79)
 public let rogueOne = (title: "Rogue One", rating: 85)
-public let episodeIV = (title: "A New Hope", rating: 93)
+public let episodeIV = (title: "4-A New Hope", rating: 93)
 public let episodeV = (title: "The Empire Strikes Back", rating: 94)
 public let episodeVI = (title: "Return Of The Jedi", rating: 80)
 public let episodeVII = (title: "The Force Awakens", rating: 93)
@@ -67,7 +67,7 @@ example(of: "filter") {
         .disposed(by: disposeBag)
 }
 
-example(of: "Skip while") {
+example(of: "SkipWhile") {
     
     let diposeBag = DisposeBag()
     Observable.from(tomatometerRatings)
@@ -78,6 +78,35 @@ example(of: "Skip while") {
             print($0)
         })
         .disposed(by: diposeBag)
+}
+
+example(of: "SkipUntil") {
+    
+    let diposebag = DisposeBag()
+    
+    let subject = PublishSubject<String>()
+    let trigger = PublishSubject<Void>()
+    
+    subject
+        .skipUntil(subject)
+        .subscribe(onNext: {
+            print($0)
+        })
+        .disposed(by: diposebag)
+    
+    subject.onNext(episodeI.title)
+    subject.onNext(episodeII.title)
+    subject.onNext(episodeIII.title)
+    
+    trigger.onNext(())
+
+    subject.onNext(episodeIV.title)
+    subject.onNext(episodeV.title)
+    subject.onNext(episodeVI.title)
+    
+
+
+    
 }
 
 
