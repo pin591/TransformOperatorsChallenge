@@ -53,17 +53,6 @@ example(of: "elementAt") {
     quotes.onNext("may the force")
 }
 
-example(of: "skip") {
-    let diposeBag = DisposeBag()
-    
-    Observable.from(tomatometerRatings)
-        .skip(4)
-        .subscribe(onNext: {
-                    print($0)
-        })
-        .disposed(by: diposeBag)
-}
-
 example(of: "filter") {
     
     let disposeBag = DisposeBag()
@@ -76,6 +65,29 @@ example(of: "filter") {
             print($0)
         })
         .disposed(by: disposeBag)
+}
+
+example(of: "skip") {
+    let diposeBag = DisposeBag()
+    
+    Observable.from(tomatometerRatings)
+        .skip(4)
+        .subscribe(onNext: {
+                    print($0)
+        })
+        .disposed(by: diposeBag)
+}
+
+
+example(of: "take") {
+    let diposeBag = DisposeBag()
+    
+    Observable.from(tomatometerRatings)
+        .take(5)
+        .subscribe(onNext: {
+                    print($0)
+        })
+        .disposed(by: diposeBag)
 }
 
 example(of: "SkipWhile") {
