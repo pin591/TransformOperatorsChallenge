@@ -103,6 +103,19 @@ example(of: "SkipWhile") {
         .disposed(by: diposeBag)
 }
 
+example(of: "takeWhile") {
+    
+    let diposeBag = DisposeBag()
+    Observable.from(tomatometerRatings)
+        .takeWhile { movie in
+            movie.rating < 90
+        }
+        .subscribe(onNext:  {
+            print($0)
+        })
+        .disposed(by: diposeBag)
+}
+
 example(of: "SkipUntil") {
     
     let diposebag = DisposeBag()
