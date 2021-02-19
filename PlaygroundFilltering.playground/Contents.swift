@@ -124,7 +124,7 @@ example(of: "SkipUntil") {
     let trigger = PublishSubject<Void>()
     
     subject
-        .skipUntil(subject)
+        .skipUntil(trigger)
         .subscribe(onNext: {
             print($0)
         })
