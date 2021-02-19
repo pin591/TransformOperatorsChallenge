@@ -13,6 +13,10 @@ public let episodeVIII = (title: "IX-The Last Jedi", rating: 91)
 public let tomatometerRatings = [episodeI, episodeII, episodeIII, rogueOne, episodeIV, episodeV, episodeVI, episodeVII, episodeVIII]
 
 
+public enum Droid {
+  case C3PO, R2D2
+}
+
 public func example(of description: String, action: () -> Void) {
     print ("\n---- Example of:", description, "-----")
     action()
@@ -90,7 +94,7 @@ example(of: "take") {
         .disposed(by: diposeBag)
 }
 
-example(of: "SkipWhile") {
+example(of: "skipWhile") {
     
     let diposeBag = DisposeBag()
     Observable.from(tomatometerRatings)
@@ -116,7 +120,7 @@ example(of: "takeWhile") {
         .disposed(by: diposeBag)
 }
 
-example(of: "SkipUntil") {
+example(of: "skipUntil") {
     
     let diposebag = DisposeBag()
     
@@ -141,7 +145,7 @@ example(of: "SkipUntil") {
     subject.onNext(episodeVI.title)
 }
 
-example(of: "TakeUntil") {
+example(of: "takeUntil") {
     
     let diposebag = DisposeBag()
     
@@ -164,6 +168,17 @@ example(of: "TakeUntil") {
     subject.onNext(episodeIV.title)
     subject.onNext(episodeV.title)
     subject.onNext(episodeVI.title)
+}
+
+example(of: "distinctUntilChange") {
+    let disposeBag = DisposeBag()
+    
+    Observable<Droid>.of(.R2D2, .C3PO,.C3PO, .R2D2)
+        .distinctUntilChanged()
+        .subscribe(onNext: {
+            print($0)
+        })
+        .disposed(by: disposeBag)
 }
 
 
