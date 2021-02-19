@@ -1,15 +1,15 @@
 import UIKit
 import RxSwift
 
-public let episodeI = (title: "1-The Phantom Menace", rating: 55)
-public let episodeII = (title: "2-Attack of the Clones", rating: 66)
-public let episodeIII = (title: "3-Revenge of the Sith", rating: 79)
-public let rogueOne = (title: "Rogue One", rating: 85)
-public let episodeIV = (title: "4-A New Hope", rating: 93)
-public let episodeV = (title: "The Empire Strikes Back", rating: 94)
-public let episodeVI = (title: "Return Of The Jedi", rating: 80)
-public let episodeVII = (title: "The Force Awakens", rating: 93)
-public let episodeVIII = (title: "The Last Jedi", rating: 91)
+public let episodeI = (title: "I-The Phantom Menace", rating: 55)
+public let episodeII = (title: "II-Attack of the Clones", rating: 66)
+public let episodeIII = (title: "III-Revenge of the Sith", rating: 79)
+public let rogueOne = (title: "IV-Rogue One", rating: 85)
+public let episodeIV = (title: "V-A New Hope", rating: 93)
+public let episodeV = (title: "VI-The Empire Strikes Back", rating: 94)
+public let episodeVI = (title: "VII-Return Of The Jedi", rating: 80)
+public let episodeVII = (title: "VIII-The Force Awakens", rating: 93)
+public let episodeVIII = (title: "IX-The Last Jedi", rating: 91)
 public let tomatometerRatings = [episodeI, episodeII, episodeIII, rogueOne, episodeIV, episodeV, episodeVI, episodeVII, episodeVIII]
 
 
@@ -51,6 +51,17 @@ example(of: "elementAt") {
     quotes.onNext("may the odds")
     quotes.onNext("live long and prosper")
     quotes.onNext("may the force")
+}
+
+example(of: "skip") {
+    let diposeBag = DisposeBag()
+    
+    Observable.from(tomatometerRatings)
+        .skip(4)
+        .subscribe(onNext: {
+                    print($0)
+        })
+        .disposed(by: diposeBag)
 }
 
 example(of: "filter") {
@@ -103,10 +114,6 @@ example(of: "SkipUntil") {
     subject.onNext(episodeIV.title)
     subject.onNext(episodeV.title)
     subject.onNext(episodeVI.title)
-    
-
-
-    
 }
 
 
