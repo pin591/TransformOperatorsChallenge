@@ -44,5 +44,32 @@ example (of: "flatMap") {
     
     ryan.rank.onNext(.jediKnight)
     charlotte.rank.onNext(.jediMaster)
+}
+
+example (of: "flatLatestMap") {
+    
+    let disposeBag = DisposeBag()
+    
+    let ryan = Jedi(rank: BehaviorSubject(value: .youngling))
+    let charlotte = Jedi(rank: BehaviorSubject(value: .youngling))
+    
+    let student = PublishSubject<Jedi>()
+    
+    student
+        .flatMapLatest {
+            $0.rank
+        }
+        .subscribe(onNext: {
+            print($0.rawValue)
+        })
+        .disposed(by: disposeBag)
+    
+    student.onNext(ryan)
+    ryan.rank.onNext(.padawan)
+    
+    student.onNext(charlotte)
+    
+    ryan.rank.onNext(.jediKnight)
+    charlotte.rank.onNext(.jediMaster)
 
 }
