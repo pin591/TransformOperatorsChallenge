@@ -58,7 +58,19 @@ example(of: "Challenge 1") {
   let input = Variable<String>("")
   
   // Add your code here
-  
+  input.asObservable()
+    .map(convert)
+    .unwrap()
+    .skipWhile { $0 == 0 }
+    .take(10)
+    .toArray()
+    .map(format)
+    .map(dial)
+    .asObservable()
+    .subscribe(onNext: {
+      print($0)
+    })
+    .disposed(by: disposeBag)
   
   input.value = ""
   input.value = "0"
@@ -75,8 +87,3 @@ example(of: "Challenge 1") {
   
   input.value = "9"
 }
-
-
-
-
-
