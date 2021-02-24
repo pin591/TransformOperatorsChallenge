@@ -8,5 +8,6 @@ target 'InstallingRxSwift' do
   # Pods for InstallingRxSwift
 	
   pod 'RxSwift', '~> 5.1'
+  pod 'RxSwiftExt'
 
 end
