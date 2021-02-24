@@ -1,4 +1,5 @@
 import Foundation
+import RxSwift
 
 public func example(of description: String, action: () -> Void) {
   print("\n--- Example of:", description, "---")
@@ -54,4 +55,22 @@ public extension String {
     
     return result
   }
+}
+
+public struct Jedi {
+  
+  public var rank: BehaviorSubject<JediRank>
+  
+  public init(rank: BehaviorSubject<JediRank>) {
+    self.rank = rank
+  }
+}
+
+public enum JediRank: String {
+  
+  case youngling = "Youngling"
+  case padawan = "Padawan"
+  case jediKnight = "Jedi Knight"
+  case jediMaster = "Jedi Master"
+  case jediGrandMaster = "Jedi Grand Master"
 }
